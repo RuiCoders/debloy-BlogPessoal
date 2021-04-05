@@ -17,7 +17,7 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	public Optional<Usuario> CadastrarUsuario(Usuario usuario) {
+	public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
 		
 		if (repository.findByUsuario(usuario.getUsuario()).isPresent())
 			return null;
@@ -42,12 +42,24 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String(encodeAuth);
 
 				user.get().setToken(authHeader);
-				user.get().setUsuario(usuario.get().getNome());
+				user.get().setId(usuario.get().getId());
+				user.get().setNome(usuario.get().getNome());
 				user.get().setSenha(usuario.get().getSenha());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+				
 				return user;
 			}
 
 		}
 		return null;
+	}
+	public Optional<Usuario> atualizarUsuario(Usuario usuario) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String senhaEncoder = encoder.encode(usuario.getSenha());
+		usuario.setSenha(senhaEncoder);
+		
+		return Optional.of(repository.save(usuario));
 	}
 }
