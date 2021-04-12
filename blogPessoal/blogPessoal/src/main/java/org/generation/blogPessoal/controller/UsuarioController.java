@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@Api(value="API REST Usuario")
 public class UsuarioController {
 
 	@Autowired
@@ -29,8 +32,8 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository repository;
-
-	@GetMapping
+	/*Adicionado no modulo de Angular*/
+	@GetMapping 
 	public ResponseEntity<List<Usuario>> getAll() {
 		return ResponseEntity.ok(repository.findAll());
 	}
@@ -55,7 +58,7 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().build();
 		}
 	}
-
+	/*Alteração de usuário*/
 	@PutMapping
 	public ResponseEntity<Usuario> put(@RequestBody Usuario usuario) {
 		Optional<Usuario> user = usuarioService.atualizarUsuario(usuario);

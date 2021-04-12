@@ -25,7 +25,7 @@ public Docket docket(){
 			.paths(PathSelectors.any()).build().apiInfo(apiInfo());
 }
 private ApiInfo apiInfo(){ 
-	return new ApiInfoBuilder().title("Blog Pessoal").description("API do Projeto de blog pessoal")
+	return new ApiInfoBuilder().title("Blog Pessoal do Rui Andrade").description("API do Projeto de Blog pessoal")
 			.version("1.0")
 			.contact(contact())
 			.build(); 
@@ -33,7 +33,7 @@ private ApiInfo apiInfo(){
 private Contact contact(){ 
 	return new Contact("Rui Almeida de Andrade",
 			"https://github.com/RuiCoders",
-			"Desenvolvedor full stack Angular Spring"); 
+			"Desenvolvedor full stack Java"); 
 } 
 
 }
